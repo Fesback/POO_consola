@@ -10,10 +10,8 @@ import com.zephyr.service.EmbarqueService;
 import com.zephyr.service.impl.AuthServiceImpl;
 import com.zephyr.service.impl.EmbarqueServiceImpl;
 
-import javax.swing.text.html.Option;
 import java.util.LinkedList;
 import java.util.Optional;
-import java.util.Random;
 import java.util.Scanner;
 
 public class ConsoleApp {
@@ -36,7 +34,7 @@ public class ConsoleApp {
         if (personalLogueado.isPresent()) {
             Personal personal = personalLogueado.get();
             System.out.println("\n-------------------------------------");
-            System.out.println("¡Bienvenido, " + personal.getNombres() + "!");
+            System.out.println("Bienvenido, " + personal.getNombres() + "!");
             System.out.println("Tu Rol es: " + personal.getRol().getNomberRol());
             System.out.println("-------------------------------------");
 
@@ -48,7 +46,7 @@ public class ConsoleApp {
 
         } else {
             System.out.println("\n-------------------------------------");
-            System.out.println("ERROR: Correo o contraseña incorrectos.");
+            System.out.println("ERROR: Correo o contrasena incorrectos.");
             System.out.println("-------------------------------------");
         }
 
@@ -59,7 +57,7 @@ public class ConsoleApp {
     private static Optional<Personal> handleLogin() {
         System.out.print("Ingrese su correo: ");
         String correo = scanner.nextLine();
-        System.out.print("Ingrese su contraseña: ");
+        System.out.print("Ingrese su contrasena: ");
         String contrasena = scanner.nextLine();
 
         return authService.login(correo, contrasena);
@@ -69,7 +67,7 @@ public class ConsoleApp {
         boolean salir = false;
         while (!salir) {
             System.out.println("\n----- Menú de Administrador (CRUD) -----");
-            System.out.println("--- Gestión Personal ---");
+            System.out.println("--- Gestion Personal ---");
             System.out.println("1. Listar Personal");
             System.out.println("2. Registrar Agente");
             System.out.println("3. Actualizar Agente");
@@ -85,7 +83,7 @@ public class ConsoleApp {
             System.out.println("10. Ver Manifiesto de Vuelo");
             System.out.println("-------------------------------------------");
             System.out.println("11. Salir");
-            System.out.print("Seleccione una opción: ");
+            System.out.print("Seleccione una opcion: ");
 
             String opcion = scanner.nextLine();
 
@@ -124,7 +122,7 @@ public class ConsoleApp {
                     salir = true;
                     break;
                 default:
-                    System.out.println("Opción no válida. Intente de nuevo.");
+                    System.out.println("Opcion no valida. Intente de nuevo.");
             }
         }
     }
@@ -146,8 +144,8 @@ public class ConsoleApp {
         Personal nuevoAgente = new Personal(0, nombres, apellidos, dni, correo, pass, rolAgente);
 
         personalDAO.create(nuevoAgente);
-        System.out.println("\n¡Agente registrado!");
-        System.out.println("La contraseña temporal generada es: " + pass);
+        System.out.println("\nAgente registrado!");
+        System.out.println("La contrasena temporal generada es: " + pass);
     }
 
     private static void listarPersonal() {
@@ -172,7 +170,7 @@ public class ConsoleApp {
         Optional<Personal> personalOpt = personalDAO.read(id);
 
         if (personalOpt.isEmpty()) {
-            System.out.println("ERROR: No se encontró ningún agente con el ID: " + id);
+            System.out.println("ERROR: No se encontro ningun agente con el ID: " + id);
             return;
         }
 
@@ -189,7 +187,7 @@ public class ConsoleApp {
 
         personalDAO.update(personalParaActualizar);
 
-        System.out.println("\n¡Agente actualizado!");
+        System.out.println("\nAgente actualizado!");
     }
 
     private static void eliminarAgente() {
@@ -207,7 +205,7 @@ public class ConsoleApp {
             System.out.println("1. Asignar Pasajero a Vuelo (Servicio)");
             System.out.println("2. Ver Manifiesto de Vuelo (Servicio)");
             System.out.println("3. Salir");
-            System.out.print("Seleccione una opción: ");
+            System.out.print("Seleccione una opcion: ");
 
             String opcion = scanner.nextLine();
 
@@ -222,7 +220,7 @@ public class ConsoleApp {
                     salir = true;
                     break;
                 default:
-                    System.out.println("Opción no válida. Intente de nuevo.");
+                    System.out.println("Opcion no volida intente de nuevo.");
 
             }
         }
@@ -230,7 +228,7 @@ public class ConsoleApp {
 
     private static void handleCrearVuelo() {
         System.out.println("\n----- Crear Nuevo Vuelo -----");
-        System.out.print("Código (ej. ZEP-001): ");
+        System.out.print("Codigo (ej. ZEP-001): ");
         String codigo = scanner.nextLine();
         System.out.print("Origen: ");
         String origen = scanner.nextLine();
@@ -241,7 +239,7 @@ public class ConsoleApp {
 
         vueloDAO.create(nuevoVuelo);
 
-        System.out.println("¡Vuelo creado con ID " + nuevoVuelo.getId() + "!");
+        System.out.println("Vuelo creado con ID " + nuevoVuelo.getId() + "!");
     }
 
     private static void handleListarVuelos() {
@@ -267,13 +265,13 @@ public class ConsoleApp {
         String apellido = scanner.nextLine();
         System.out.print("Tipo Documento (DNI/Pasaporte): ");
         String tipoDoc = scanner.nextLine();
-        System.out.print("Número Documento: ");
+        System.out.print("Numero Documento: ");
         String nroDoc = scanner.nextLine();
 
         Pasajero nuevoPasajero = new Pasajero(nombre, apellido, tipoDoc, nroDoc);
         pasajeroDAO.create(nuevoPasajero);
 
-        System.out.println("¡Pasajero creado con ID " + nuevoPasajero.getId() + "!");
+        System.out.println("Pasajero creado con ID " + nuevoPasajero.getId() + "!");
     }
 
     private static void handleListarPasajeros() {
@@ -303,7 +301,7 @@ public class ConsoleApp {
         boolean exito = embarqueService.asignarPasajeroAVuelo(idPasajero, idVuelo, asiento);
 
         if (exito) {
-            System.out.println("¡Asignación exitosa!");
+            System.out.println("¡Asignacion exitosa!");
         } else {
             System.out.println("No se pudo completar la asignación.");
         }

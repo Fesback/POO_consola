@@ -18,9 +18,9 @@ public class EmbarqueServiceImpl implements EmbarqueService {
     private VueloDAO vueloDAO;
 
     public EmbarqueServiceImpl(PasajeroDAO pasajeroDAO, VueloDAO vueloDAO, BoletoDAO boletoDAO) {
-        this.pasajeroDAO = new PasajeroDAO();
-        this.boletoDAO = new BoletoDAO();
-        this.vueloDAO = new VueloDAO();
+        this.pasajeroDAO = pasajeroDAO;
+        this.boletoDAO = boletoDAO;
+        this.vueloDAO = vueloDAO;
     }
 
     @Override
